@@ -1,13 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hook/useAuthContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { signInUser, signInWithGoogle } = useAuthContext();
   const handleLogin = (e) => {
     e.preventDefault();
 
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
+
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        e.target.reset();
+        navigate("/");
+      })
+      .catch((error) => console.log(error.message));
   };
   return (
     <div className="hero bg-base-200 ">
