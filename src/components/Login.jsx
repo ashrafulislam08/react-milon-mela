@@ -20,6 +20,16 @@ const Login = () => {
       })
       .catch((error) => console.log(error.message));
   };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+        navigate("/");
+      })
+      .catch((error) => console.log("ERROR", error.message));
+  };
+
   return (
     <div className="hero bg-base-200 ">
       <div className="hero-content flex-col">
@@ -64,6 +74,15 @@ const Login = () => {
                 Sign Up
               </Link>
               .
+            </p>
+            <p className="text-center">
+              <button onClick={handleGoogleSignIn}>
+                <img
+                  className="w-10 mx-auto"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png"
+                  alt="Sign with google"
+                />
+              </button>
             </p>
           </form>
         </div>
